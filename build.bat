@@ -49,7 +49,7 @@ if errorlevel 1 (
 
 echo  [2/2]  Copying to build\...
 if not exist "%BUILD%" mkdir "%BUILD%"
-copy /Y "%REPO%\target\release\%BIN%" "%BUILD%\" >nul
+copy /Y "D:\rust-targets\lancer-cloudfox\release\%BIN%" "%BUILD%\" >nul
 if errorlevel 1 (
     echo  ERROR: %BIN% not found in target\release
     pause

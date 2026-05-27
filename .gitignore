@@ -6,6 +6,9 @@ target/
 build/
 dist/
 
+# Local cargo config (machine-specific target-dir)
+.cargo/
+
 # OS / editor
 .DS_Store
 Thumbs.db

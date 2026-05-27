@@ -8,14 +8,67 @@ license = "MIT"
 repository = "https://github.com/NHTanvir/lancer-cloudfox"
 
 [dependencies]
+# CLI
 clap = { version = "4", features = ["derive"] }
+
+# Async
 tokio = { version = "1", features = ["full"] }
-anyhow = "1"
-tracing = "0.1"
-tracing-subscriber = "0.3"
+
+# AWS SDK
+# default-features = false drops the default-https-client → aws-lc-rs chain,
+# which requires C compilation. Ring-based TLS is supplied programmatically
+# via aws-smithy-http-client below (pure-Rust, no C toolchain needed).
+aws-config = { version = "1", default-features = false, features = [
+    "behavior-version-latest",
+    "rt-tokio",
+    "credentials-process",
+    "sso",
+] }
+aws-smithy-http-client = { version = "1", features = ["rustls-ring"] }
+aws-sdk-sts            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-ec2            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-s3             = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-iam            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-lambda         = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-rds            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-secretsmanager = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-ecs            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-ssm            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-dynamodb       = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-cloudformation = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-route53        = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-eks            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-ecr            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-sns            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-sqs            = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-sdk-codebuild      = { version = "1", default-features = false, features = ["rt-tokio"] }
+aws-smithy-types       = "1"
+
+# Graph (for cape / trust mapping)
+petgraph = "0.6"
+
+# Output
+comfy-table = "7"
+serde       = { version = "1", features = ["derive"] }
+serde_json  = "1"
+csv         = "1.3"
+colored     = "2"
+indicatif   = "0.17"
+
+# Error handling + logging
+anyhow             = "1"
+tracing            = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Azure (REST via reqwest + az CLI for token acquisition)
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
+
+# TUI (cape-tui Week 12)
+ratatui   = "0.28"
+crossterm = "0.28"
 
 [profile.release]
-opt-level = 3
-lto = true
-codegen-units = 1
-strip = true
+opt-level      = 3
+lto            = true
+codegen-units  = 1
+strip          = true

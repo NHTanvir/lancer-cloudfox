@@ -12,7 +12,7 @@ if exist "%DIST%" rmdir /s /q "%DIST%"
 mkdir "%DIST%"
 mkdir "%DIST%\bin"
 
-copy target\release\lancer-cloudfox.exe "%DIST%\bin\" >nul
+copy D:\rust-targets\lancer-cloudfox\release\lancer-cloudfox.exe "%DIST%\bin\" >nul
 copy LICENSE "%DIST%\" >nul 2>nul
 copy README.md "%DIST%\" >nul 2>nul
 

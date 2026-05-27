@@ -1,0 +1,15 @@
+pub mod bigquery;
+pub mod client;
+pub mod cloudrun;
+pub mod cloudsql;
+pub mod functions;
+pub mod gke;
+pub mod iam;
+pub mod instances;
+pub mod inventory;
+pub mod kms;
+pub mod privesc;
+pub mod secrets;
+pub mod serviceaccounts;
+pub mod storage;
+pub mod whoami;
